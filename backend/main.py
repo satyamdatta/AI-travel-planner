@@ -22,7 +22,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://ai-travel-planner-frontend.onrender.com"
+        "https://ai-travel-planner-1-e73a.onrender.com"
     ],
     allow_credentials=True,
     allow_methods=["*"],
