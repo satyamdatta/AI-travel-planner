@@ -8,6 +8,7 @@ import {
 
 function ItineraryPanel({
   summary,
+  itineraryReady,
   onOpenItinerary
 }: any) {
 
@@ -119,18 +120,35 @@ function ItineraryPanel({
               🎯 Attractions Found: {summary.attractionCount || 0}
             </Typography>
 
-            <Link
-              component="button"
-              underline="hover"
-              onClick={onOpenItinerary}
-              sx={{
-                color: '#60a5fa',
-                cursor: 'pointer',
-                fontWeight: 'bold'
-              }}
-            >
-              See Full Itinerary →
-            </Link>
+            {
+              itineraryReady ? (
+
+                <Link
+                  component="button"
+                  underline="hover"
+                  onClick={onOpenItinerary}
+                  sx={{
+                    color: '#60a5fa',
+                    cursor: 'pointer',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  See Full Itinerary →
+                </Link>
+
+              ) : (
+
+                <Typography
+                  sx={{
+                    color: '#fbbf24',
+                    fontWeight: 500
+                  }}
+                >
+                  ⏳ Building itinerary...
+                </Typography>
+
+              )
+            }
 
           </Box>
 

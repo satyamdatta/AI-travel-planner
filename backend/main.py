@@ -84,7 +84,7 @@ async def send_new_logs(
             "message": log
         })
 
-        await asyncio.sleep(0.25)
+        await asyncio.sleep(0.12)
 
     return len(state["logs"])
 
@@ -192,7 +192,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 "data": state["tool_calls"][-1]
             })
 
-            await asyncio.sleep(0.4)
+            await asyncio.sleep(0.6)
 
             await websocket.send_json({
                 "type": "step",
@@ -225,7 +225,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 "data": state["tool_calls"][-1]
             })
 
-            await asyncio.sleep(0.5)
+            await asyncio.sleep(0.7)
 
             await websocket.send_json({
                 "type": "step",
@@ -258,7 +258,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 "data": state["tool_calls"][-1]
             })
 
-            await asyncio.sleep(0.4)
+            await asyncio.sleep(0.5)
 
             await websocket.send_json({
                 "type": "step",
@@ -291,7 +291,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 "data": state["tool_calls"][-1]
             })
 
-            await asyncio.sleep(0.6)
+            await asyncio.sleep(0.8)
 
             await websocket.send_json({
                 "type": "step",
@@ -324,7 +324,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 "data": state["tool_calls"][-1]
             })
 
-            await asyncio.sleep(0.6)
+            await asyncio.sleep(0.8)
 
             await websocket.send_json({
                 "type": "step",
@@ -352,7 +352,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 log_index
             )
 
-            await asyncio.sleep(0.6)
+            await asyncio.sleep(0.8)
 
             await websocket.send_json({
                 "type": "step",
@@ -369,6 +369,8 @@ async def websocket_endpoint(websocket: WebSocket):
                 "step": "final",
                 "status": "running"
             })
+
+            await asyncio.sleep(0.7)
 
             await websocket.send_json({
                 "type": "final",

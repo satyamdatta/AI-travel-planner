@@ -36,6 +36,8 @@ function Dashboard({
 
   const [tripSummary, setTripSummary] = useState<any>(null)
 
+  const [itineraryReady, setItineraryReady] = useState(false)
+
   const [steps, setSteps] = useState({
     parse: "pending",
     extract: "pending",
@@ -86,9 +88,22 @@ function Dashboard({
 
       if (data.type === 'tool') {
 
+        const timestamp =
+          new Date().toLocaleTimeString(
+            [],
+            {
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit'
+            }
+          )
+
         setTools(prev => [
           ...prev,
-          data.data
+          {
+            ...data.data,
+            timestamp
+          }
         ])
 
         if (data.data.tool === "Budget Allocator") {
@@ -129,6 +144,8 @@ function Dashboard({
       // FINAL RESPONSE
 
       if (data.type === 'final') {
+        setItineraryReady(true)
+
         setItinerary(
           data.message
         )
@@ -153,6 +170,8 @@ function Dashboard({
     setAllocation(null)
 
     setTripSummary(null)
+
+    setItineraryReady(false)
 
     setSteps({
       parse: "pending",
@@ -329,6 +348,7 @@ function Dashboard({
 
             <ItineraryPanel
               summary={tripSummary}
+              itineraryReady={itineraryReady}
               onOpenItinerary={() => {
 
                 setPage(
