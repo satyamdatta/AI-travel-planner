@@ -8,6 +8,7 @@ function ChatBox({ sendMessage }: any) {
 
 
   const handleSend = () => {
+    if (!query.trim()) return
 
     sendMessage(query)
 
@@ -32,7 +33,7 @@ function ChatBox({ sendMessage }: any) {
           }
 
         }}
-        placeholder="Plan my trip..."
+        placeholder="Plan my trip....e.g. Plan my trip to {abc} within {xyz} budget"
         sx={{
           input: {
             color: 'white'

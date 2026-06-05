@@ -38,36 +38,47 @@ function BudgetChart({ allocation }: any) {
         )
     }
 
+    const total =
+        allocation.flight_cost +
+        allocation.hotel_cost +
+        allocation.food_cost +
+        allocation.travel_cost +
+        allocation.activities_cost +
+        allocation.misc_cost;
+
+    const getPercent = (value: number) =>
+        Math.round((value / total) * 100);
+
     const data = [
         {
             id: 0,
             value: allocation.flight_cost,
-            label: "Flights"
+            label: `Flights ${getPercent(allocation.flight_cost)}%`
         },
         {
             id: 1,
             value: allocation.hotel_cost,
-            label: "Hotels"
+            label: `Hotels ${getPercent(allocation.hotel_cost)}%`
         },
         {
             id: 2,
             value: allocation.food_cost,
-            label: "Food"
+            label: `Food ${getPercent(allocation.food_cost)}%`
         },
         {
             id: 3,
             value: allocation.travel_cost,
-            label: "Transport"
+            label: `Transport ${getPercent(allocation.travel_cost)}%`
         },
         {
             id: 4,
             value: allocation.activities_cost,
-            label: "Activities"
+            label: `Activities ${getPercent(allocation.activities_cost)}%`
         },
         {
             id: 5,
             value: allocation.misc_cost,
-            label: "Misc"
+            label: `Misc ${getPercent(allocation.misc_cost)}%`
         }
     ];
 
@@ -122,27 +133,27 @@ function BudgetChart({ allocation }: any) {
                     }}
                 >
                     <Typography>
-                        ✈ Flights ₹{allocation.flight_cost.toLocaleString()}
+                        ✈ Flights {getPercent(allocation.flight_cost)}%
                     </Typography>
 
                     <Typography>
-                        🏨 Hotels ₹{allocation.hotel_cost.toLocaleString()}
+                        🏨 Hotels {getPercent(allocation.hotel_cost)}%
                     </Typography>
 
                     <Typography>
-                        🍔 Food ₹{allocation.food_cost.toLocaleString()}
+                        🍔 Food {getPercent(allocation.food_cost)}%
                     </Typography>
 
                     <Typography>
-                        🚕 Transport ₹{allocation.travel_cost.toLocaleString()}
+                        🚕 Transport {getPercent(allocation.travel_cost)}%
                     </Typography>
 
                     <Typography>
-                        🎡 Activities ₹{allocation.activities_cost.toLocaleString()}
+                        🎡 Activities {getPercent(allocation.activities_cost)}%
                     </Typography>
 
                     <Typography>
-                        📦 Misc ₹{allocation.misc_cost.toLocaleString()}
+                        📦 Misc {getPercent(allocation.misc_cost)}%
                     </Typography>
                 </Box>
             </Box>

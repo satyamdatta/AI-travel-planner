@@ -250,9 +250,17 @@ function Dashboard({
 
         <Grid size={4}>
 
-          <BudgetChart
-            allocation={allocation}
-          />
+          <Box
+            sx={{
+              mb: 2
+            }}
+          >
+
+            <BudgetChart
+              allocation={allocation}
+            />
+
+          </Box>
 
         </Grid>
 
@@ -261,7 +269,13 @@ function Dashboard({
 
         <Grid size={4}>
 
-          <LogsPanel logs={logs} />
+          <Box
+            sx={{
+              height: '350px'
+            }}
+          >
+            <LogsPanel logs={logs} />
+          </Box>
 
         </Grid>
 
@@ -275,7 +289,7 @@ function Dashboard({
               background: '#111827',
               borderRadius: 4,
               p: 2,
-              height: '350px',
+              height: '360px',
               overflowY: 'auto'
             }}
           >
@@ -307,16 +321,23 @@ function Dashboard({
 
         <Grid size={4}>
 
-          <ItineraryPanel
-            summary={tripSummary}
-            onOpenItinerary={() => {
+          <Box
+            sx={{
+              height: '360px'
+            }}
+          >
 
-              setPage(
-                'itinerary'
-              )
-            }
-            }
-          />
+            <ItineraryPanel
+              summary={tripSummary}
+              onOpenItinerary={() => {
+
+                setPage(
+                  'itinerary'
+                )
+              }}
+            />
+
+          </Box>
 
         </Grid>
 

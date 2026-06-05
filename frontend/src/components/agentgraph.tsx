@@ -3,6 +3,8 @@ import ReactFlow, {
   Position
 } from "reactflow";
 
+import CircularProgress from "@mui/material/CircularProgress";
+
 import "reactflow/dist/style.css";
 
 function AgentGraph({ steps }: any) {
@@ -41,7 +43,38 @@ function AgentGraph({ steps }: any) {
     fontSize: "15px",
 
     border: "2px solid rgba(255,255,255,0.08)"
+
   });
+
+  const nodeLabel = (
+    label: string,
+    running: boolean
+  ) => (
+
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 8
+      }}
+    >
+
+      {
+        running && (
+          <CircularProgress
+            size={14}
+            sx={{
+              color: "white"
+            }}
+          />
+        )
+      }
+
+      <span>{label}</span>
+
+    </div>
+
+  );
 
   const nodes = [
 
@@ -52,7 +85,13 @@ function AgentGraph({ steps }: any) {
       sourcePosition: Position.Right,
       targetPosition: Position.Left,
 
-      data: { label: "Parse" },
+      data: {
+        label: nodeLabel(
+          "Parse",
+          steps?.parse === "running"
+        )
+      },
+
       style: nodeStyle(steps?.parse)
     },
 
@@ -62,7 +101,14 @@ function AgentGraph({ steps }: any) {
 
       sourcePosition: Position.Right,
       targetPosition: Position.Left,
-      data: { label: "Extract" },
+
+      data: {
+        label: nodeLabel(
+          "Extract",
+          steps?.extract === "running"
+        )
+      },
+
       style: nodeStyle(steps?.extract)
     },
 
@@ -73,7 +119,13 @@ function AgentGraph({ steps }: any) {
       sourcePosition: Position.Right,
       targetPosition: Position.Left,
 
-      data: { label: "Allocate" },
+      data: {
+        label: nodeLabel(
+          "Allocate",
+          steps?.allocate === "running"
+        )
+      },
+
       style: nodeStyle(steps?.allocate)
     },
 
@@ -82,11 +134,14 @@ function AgentGraph({ steps }: any) {
       position: { x: 840, y: 0 },
 
       sourcePosition: Position.Bottom,
-
       targetPosition: Position.Left,
 
-
-      data: { label: "Validate" },
+      data: {
+        label: nodeLabel(
+          "Validate",
+          steps?.validate === "running"
+        )
+      },
 
       style: nodeStyle(steps?.validate)
     },
@@ -96,11 +151,14 @@ function AgentGraph({ steps }: any) {
       position: { x: 0, y: 140 },
 
       sourcePosition: Position.Right,
-
       targetPosition: Position.Top,
 
-
-      data: { label: "Search Attractions" },
+      data: {
+        label: nodeLabel(
+          "Search Attractions",
+          steps?.search === "running"
+        )
+      },
 
       style: nodeStyle(steps?.search)
     },
@@ -111,7 +169,13 @@ function AgentGraph({ steps }: any) {
 
       sourcePosition: Position.Right,
       targetPosition: Position.Left,
-      data: { label: "Search Hotels" },
+
+      data: {
+        label: nodeLabel(
+          "Search Hotels",
+          steps?.hotels === "running"
+        )
+      },
 
       style: nodeStyle(steps?.hotels)
     },
@@ -123,7 +187,12 @@ function AgentGraph({ steps }: any) {
       sourcePosition: Position.Right,
       targetPosition: Position.Left,
 
-      data: { label: "Build Itinerary" },
+      data: {
+        label: nodeLabel(
+          "Build Itinerary",
+          steps?.itinerary === "running"
+        )
+      },
 
       style: nodeStyle(steps?.itinerary)
     },
@@ -135,7 +204,12 @@ function AgentGraph({ steps }: any) {
       sourcePosition: Position.Right,
       targetPosition: Position.Left,
 
-      data: { label: "Final Response" },
+      data: {
+        label: nodeLabel(
+          "Final Response",
+          steps?.final === "running"
+        )
+      },
 
       style: nodeStyle(steps?.final)
     }
@@ -178,8 +252,6 @@ function AgentGraph({ steps }: any) {
       target: "4",
       ...commonEdge
     },
-
-    // CLEAN VERTICAL DROP
 
     {
       id: "e4",
@@ -235,6 +307,13 @@ function AgentGraph({ steps }: any) {
         nodes={nodes}
         edges={edges}
         fitView
+        fitViewOptions={{
+          padding: 0.2
+        }}
+        nodesDraggable={false}
+        nodesConnectable={false}
+        zoomOnScroll={false}
+        panOnDrag={false}
         proOptions={{
           hideAttribution: true
         }}

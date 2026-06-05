@@ -10,7 +10,7 @@ function LogsPanel({ logs }: any) {
         color: 'white',
         p: 2,
         borderRadius: 3,
-        height: 300,
+        height: '360px',
         overflowY: 'auto'
       }}
     >

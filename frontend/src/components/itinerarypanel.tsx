@@ -2,7 +2,8 @@ import {
   Paper,
   Typography,
   Box,
-  Link
+  Link,
+  Divider
 } from '@mui/material'
 
 function ItineraryPanel({
@@ -10,65 +11,134 @@ function ItineraryPanel({
   onOpenItinerary
 }: any) {
 
+  const hasTrip =
+    summary?.destination
+
   return (
+
     <Paper
       sx={{
         background: '#111827',
         color: 'white',
-        p: 2,
-        borderRadius: 3,
+        p: 3,
+        borderRadius: 4,
         height: '100%',
         overflow: 'hidden'
       }}
     >
+
       <Typography
         variant="h6"
-        sx={{ mb: 2 }}
+        sx={{
+          mb: 3,
+          fontWeight: 'bold'
+        }}
       >
         Trip Summary
       </Typography>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+      {
+        !hasTrip ? (
 
-        <Typography>
-          📍 {summary?.destination || "Waiting..."}
-        </Typography>
-
-        <Typography>
-          💰 ₹{summary?.budget?.toLocaleString?.() || 0}
-        </Typography>
-
-        <Typography>
-          🏨 {summary?.hotelCount || 0} Hotels Found
-        </Typography>
-
-        <Typography>
-          📍 {summary?.attractionCount || 0} Attractions Found
-        </Typography>
-
-        <Typography>
-          🎯 Budget Successfully Allocated
-        </Typography>
-
-        <Box sx={{ mt: 3 }}>
-
-          <Link
-            component="button"
-            underline="hover"
-            onClick={onOpenItinerary}
+          <Box
             sx={{
-              color: '#60a5fa',
-              cursor: 'pointer'
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center'
             }}
           >
-            See Full Itinerary →
-          </Link>
+            <Typography
+              sx={{
+                color: '#9ca3af'
+              }}
+            >
+              Plan a trip to see summary
+            </Typography>
+          </Box>
 
-        </Box>
+        ) : (
 
-      </Box>
+          <Box>
+
+            <Typography
+              sx={{
+                color: '#9ca3af',
+                fontSize: 13
+              }}
+            >
+              Destination
+            </Typography>
+
+            <Typography
+              variant="h5"
+              sx={{
+                mb: 2,
+                fontWeight: 'bold'
+              }}
+            >
+              📍 {summary.destination}
+            </Typography>
+
+            <Divider
+              sx={{
+                borderColor: '#374151',
+                mb: 2
+              }}
+            />
+
+            <Typography
+              sx={{
+                color: '#9ca3af',
+                fontSize: 13
+              }}
+            >
+              Budget
+            </Typography>
+
+            <Typography
+              variant="h6"
+              sx={{ mb: 2 }}
+            >
+              💰 ₹{summary.budget?.toLocaleString()}
+            </Typography>
+
+            <Divider
+              sx={{
+                borderColor: '#374151',
+                mb: 2
+              }}
+            />
+
+            <Typography sx={{ mb: 1 }}>
+              🏨 Hotels Found: {summary.hotelCount || 0}
+            </Typography>
+
+            <Typography sx={{ mb: 2 }}>
+              🎯 Attractions Found: {summary.attractionCount || 0}
+            </Typography>
+
+            <Link
+              component="button"
+              underline="hover"
+              onClick={onOpenItinerary}
+              sx={{
+                color: '#60a5fa',
+                cursor: 'pointer',
+                fontWeight: 'bold'
+              }}
+            >
+              See Full Itinerary →
+            </Link>
+
+          </Box>
+
+        )
+      }
 
     </Paper>
+
   )
 }
 
